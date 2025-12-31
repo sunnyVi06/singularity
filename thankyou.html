@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Singularity Hackathon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            background: #000;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
+        .hero {
+            height: 100vh;
+            background: url('https://png.pngtree.com/thumb_back/fw800/background/20251127/pngtree-futuristic-space-station-orbiting-distant-planets-surrounded-by-vibrant-swirling-nebulae-image_20628709.webp') center/cover no-repeat fixed;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+            max-width: 100%;
+        }
+        .hero h1 {
+            font-size: 5rem;
+            text-shadow: 0 0 20px #00ffff;
+            animation: glow 2s infinite alternate;
+            margin: 0 0 20px 0;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 0 20px 0;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ffff; }
+            to { text-shadow: 0 0 30px #ff00ff; }
+        }
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .section {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(15,23,42,0.9);
+        }
+        .btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00ffff;
+        }
+        footer {
+            background: #0f172a;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .social-links svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+        .social-links a:hover svg {
+            fill: #00ffff;
+            transform: scale(1.2);
+        }
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: float 20s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100px); }
+        }
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 50px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        .music-player:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+        }
+        .music-btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+        .music-info {
+            font-size: 0.9rem;
+            color: #00ffff;
+            max-width: 150px;
+            display: none;
+        }
+        .volume-slider {
+            width: 80px;
+            display: none;
+        }
+        .music-player.expanded {
+            padding: 15px 20px;
+            border-radius: 25px;
+        }
+        .music-player.expanded .music-info,
+        .music-player.expanded .volume-slider {
+            display: block;
+        }
+        /* Success Card */
+        .success-card {
+            max-width: 700px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 50px;
+            border-radius: 15px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 40px #00ffff;
+            text-align: center;
+        }
+        .success-icon {
+            font-size: 5rem;
+            color: #00ff00;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .next-steps {
+            text-align: left;
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(0, 50, 100, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #00ffff;
+        }
+        .next-steps li {
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero { height: 80vh; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .section { padding: 60px 15px; }
+            .btn { padding: 12px 30px; font-size: 1rem; }
+            footer { padding: 40px 15px; }
+            .social-links a { margin: 0 10px; }
+            .social-links svg { width: 28px; height: 28px; }
+            .music-player {
+                bottom: 15px;
+                left: 15px;
+                padding: 8px 10px;
+            }
+            .music-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            .success-card {
+                padding: 30px 20px;
+                margin: 30px 15px;
+            }
+            .success-icon {
+                font-size: 3rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; line-height: 1.2; }
+            .hero p { font-size: 1rem; }
+            .section { padding: 40px 10px; }
+            .music-player {
+                bottom: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <button class="music-btn" id="musicToggle">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <div class="music-info" id="musicInfo">
+            Space Ambience
+        </div>
+        <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-space-ambience-428.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-space-ambience-428.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1>Registration Successful!</h1>
+            <p>Welcome to the Singularity Hackathon Community</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Thank You for Registering!</h2>
+            <p>Your registration for the Singularity Hackathon has been successfully submitted.</p>
+            <p><strong>Confirmation email</strong> has been sent to your registered email address.</p>
+            
+            <div style="margin: 40px 0;">
+                <h3>What Happens Next?</h3>
+                <div class="next-steps">
+                    <ul style="list-style: none; padding: 0;">
+                        <li>📧 <strong>Within 24 hours:</strong> You'll receive detailed event information</li>
+                        <li>👥 <strong>Team Formation:</strong> Connect with other participants in our Discord</li>
+                        <li>📚 <strong>Resource Kit:</strong> Access to APIs, datasets, and tools</li>
+                        <li>🗓️ <strong>Schedule:</strong> Final event schedule and mentor sessions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <a href="singularity.html" class="btn">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="registration.html" class="btn" style="background: linear-gradient(45deg, #ff00ff, #00ffff);">
+                    <i class="fas fa-user-plus"></i> Register Another
+                </a>
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 0.9rem; color: #aaa;">
+                Need help? Contact us at <strong>sv02619@gmail.com</strong>
+            </p>
+        </div>
+    </section>
+
+    <section class="section" style="background: rgba(0, 50, 100, 0.9);">
+        <h2>Join Our Community</h2>
+        <p>Connect with other participants, mentors, and organizers</p>
+        <div style="margin-top: 30px;">
+            <a href="https://www.instagram.com/tech_arc06" target="_blank" class="btn" style="background: linear-gradient(45deg, #E1306C, #F77737);">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.youtube.com/@tech_arc06" target="_blank" class="btn" style="background: linear-gradient(45deg, #FF0000, #FF4747);">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Singularity Hackathon | Reach for the Stars</p>
+        <p>Contact: sv02619@gmail.com | Virtual Event</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/tech_arc06" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@tech_arc06" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Music Player Functionality
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const musicInfo = document.getElementById('musicInfo');
+        
+        // Set initial volume
+        backgroundMusic.volume = volumeSlider.value / 100;
+        
+        // Try to play music automatically (browsers may block this)
+        backgroundMusic.play().catch(error => {
+            console.log("Autoplay blocked by browser. User must interact first.");
+            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        });
+        
+        // Toggle play/pause
+        musicToggle.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+                musicInfo.textContent = 'Space Ambience';
+            } else {
+                backgroundMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                musicInfo.textContent = 'Music Paused';
+            }
+            
+            // Toggle expanded view
+            musicPlayer.classList.toggle('expanded');
+        });
+        
+        // Volume control
+        volumeSlider.addEventListener('input', function() {
+            backgroundMusic.volume = volumeSlider.value / 100;
+        });
+        
+        // Expand player on hover
+        musicPlayer.addEventListener('mouseenter', function() {
+            musicPlayer.classList.add('expanded');
+        });
+        
+        musicPlayer.addEventListener('mouseleave', function() {
+            // Only collapse if music is playing (showing info)
+            if (!backgroundMusic.paused) {
+                musicPlayer.classList.remove('expanded');
+            }
+        });
+
+        // Floating particles
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 100; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.width = p.style.height = Math.random() * 5 + 'px';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDelay = Math.random() * 20 + 's';
+            p.style.animationDuration = 10 + Math.random() * 20 + 's';
+            particles.appendChild(p);
+        }
+        
+        // Confetti effect on load
+        setTimeout(() => {
+            createConfetti();
+        }, 500);
+        
+        function createConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.style.position = 'fixed';
+            confettiContainer.style.top = '0';
+            confettiContainer.style.left = '0';
+            confettiContainer.style.width = '100%';
+            confettiContainer.style.height = '100%';
+            confettiContainer.style.pointerEvents = 'none';
+            confettiContainer.style.zIndex = '9999';
+            document.body.appendChild(confettiContainer);
+            
+            const colors = ['#00ffff', '#ff00ff', '#00ff00', '#ffff00', '#ff7700'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                confetti.style.opacity = Math.random() * 0.7 + 0.3;
+                confettiContainer.appendChild(confetti);
+                
+                // Animation
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                // Remove confetti after animation
+                animation.onfinish = () => confetti.remove();
+            }
+            
+            // Remove container after all confetti is gone
+            setTimeout(() => confettiContainer.remove(), 5000);
+        }
+    </script>
+</body>
+</html>

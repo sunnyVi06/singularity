@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singularity Hackathon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Roboto', sans-serif; 
+            color: #fff; 
+            background: #000; 
+            overflow-x: hidden; 
+            line-height: 1.6;
+        }
+        h1, h2 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
+        .hero {
+            height: 100vh;
+            background: url('https://png.pngtree.com/thumb_back/fw800/background/20251127/pngtree-futuristic-space-station-orbiting-distant-planets-surrounded-by-vibrant-swirling-nebulae-image_20628709.webp') center/cover no-repeat fixed;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.6); 
+        }
+        .hero-content { 
+            position: relative; 
+            z-index: 2; 
+            padding: 0 20px;
+            max-width: 100%;
+        }
+        .hero h1 { 
+            font-size: 5rem; 
+            text-shadow: 0 0 20px #00ffff; 
+            animation: glow 2s infinite alternate; 
+            margin: 0 0 20px 0;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        .hero p { 
+            font-size: 1.5rem; 
+            max-width: 800px; 
+            margin: 0 0 20px 0;
+        }
+        @keyframes glow { 
+            from { text-shadow: 0 0 10px #00ffff; } 
+            to { text-shadow: 0 0 30px #ff00ff; } 
+        }
+        .particles { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+        }
+        .section { 
+            padding: 80px 20px; 
+            text-align: center; 
+            background: rgba(15,23,42,0.9); 
+        }
+        .btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff); 
+            padding: 15px 40px; 
+            border: none; 
+            border-radius: 50px;
+            font-size: 1.2rem; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            color: #000; 
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 30px #00ffff; 
+        }
+        footer { 
+            background: #0f172a; 
+            padding: 50px 20px; 
+            text-align: center; 
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .social-links svg {
+            width: 32px;
+            height: 32px;
+            fill: #fff;
+        }
+        .social-links a:hover svg {
+            fill: #00ffff;
+            transform: scale(1.2);
+        }
+        /* Floating Particles */
+        .particle { 
+            position: absolute; 
+            background: #fff; 
+            border-radius: 50%; 
+            opacity: 0.7; 
+            animation: float 20s infinite linear; 
+        }
+        @keyframes float { 
+            0% { transform: translateY(100vh); } 
+            100% { transform: translateY(-100px); } 
+        }
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero { height: 80vh; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .section { padding: 60px 15px; }
+            .btn { padding: 12px 30px; font-size: 1rem; }
+            footer { padding: 40px 15px; }
+            .social-links a { margin: 0 10px; }
+            .social-links svg { width: 28px; height: 28px; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; line-height: 1.2; }
+            .hero p { font-size: 1rem; }
+            .section { padding: 40px 10px; }
+        }
+        /* Schedule Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .schedule-card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #00ffff;
+            transition: 0.3s;
+        }
+        .schedule-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px #00ffff;
+        }
+        .schedule-card h3 {
+            color: #00ffff;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1>Singularity</h1>
+            <p>The Ultimate Hackathon: Build the Future at the Edge of the Galaxy</p>
+            <p>Date: feb 15-17, 2026 | Location: Virtual / Space Station Orbit (Online)</p>
+            <a href="registration.html" class="btn">Register Now</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>About Singularity</h2>
+        <p>Join innovators from across the universe in a 48-hour hackathon exploring AI, space tech, quantum computing, and the technological singularity. Theme: Orbiting a cosmic space station amidst swirling galaxies — where ideas collide like stars.</p>
+    </section>
+
+    <section class="section" style="background: url('https://images5.alphacoders.com/432/thumb-1920-432766.jpg') center/cover fixed;">
+        <h2>Themes & Tracks</h2>
+        <ul style="list-style: none; max-width: 800px; margin: auto; padding: 0;">
+            <li style="margin: 10px 0; font-size: 1.1rem;">🎯 AI Singularity & Machine Intelligence</li>
+            <li style="margin: 10px 0; font-size: 1.1rem;">🚀 Space Exploration & Galactic Tech</li>
+            <li style="margin: 10px 0; font-size: 1.1rem;">⚛️ Quantum Realities & Nebula Networks</li>
+            <li style="margin: 10px 0; font-size: 1.1rem;">🌌 Open Innovation: Black Hole Challenges</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>Schedule</h2>
+        <div class="schedule-grid">
+            <div class="schedule-card">
+                <h3>Day 1: Launch</h3>
+                <p><strong>10:00 AM</strong> - Opening Ceremony</p>
+                <p><strong>11:00 AM</strong> - Team Formation</p>
+                <p><strong>12:00 PM</strong> - Hacking Begins</p>
+                <p><strong>2:00 PM</strong> - Workshop: AI Tools</p>
+                <p><strong>7:00 PM</strong> - Mentor Sessions</p>
+            </div>
+            <div class="schedule-card">
+                <h3>Day 2: Build</h3>
+                <p><strong>9:00 AM</strong> - Checkpoint Review</p>
+                <p><strong>11:00 AM</strong> - Tech Talk: Quantum Computing</p>
+                <p><strong>2:00 PM</strong> - Workshop: Space APIs</p>
+                <p><strong>6:00 PM</strong> - Fun Activity: VR Spacewalk</p>
+                <p><strong>8:00 PM</strong> - Late Night Coding</p>
+            </div>
+            <div class="schedule-card">
+                <h3>Day 3: Present</h3>
+                <p><strong>9:00 AM</strong> - Final Submissions</p>
+                <p><strong>11:00 AM</strong> - Project Demos</p>
+                <p><strong>2:00 PM</strong> - Judging</p>
+                <p><strong>4:00 PM</strong> - Award Ceremony</p>
+                <p><strong>6:00 PM</strong> - Closing & Networking</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Prizes & Perks</h2>
+        <div style="max-width: 800px; margin: auto;">
+            <p><strong>🥇 1st Prize:</strong> $10,000 + SpaceX Merch + 1-Year GitHub Pro</p>
+            <p><strong>🥈 2nd Prize:</strong> $5,000 + NASA Swag + 6-Month AWS Credits</p>
+            <p><strong>🥉 3rd Prize:</strong> $2,000 + Quantum Computing Course</p>
+            <p><strong>✨ All Participants:</strong> Digital Badges, Certificates, Sticker Packs</p>
+            <p><strong>🤝 Special Tracks:</strong> Additional prizes for each theme category</p>
+        </div>
+        <a href="registration.html" class="btn" style="margin-top: 30px;">Register to Win!</a>
+    </section>
+
+    <section class="section" style="background: rgba(0, 50, 100, 0.9);">
+        <h2>Judges & Mentors</h2>
+        <p style="max-width: 800px; margin: auto;">Learn from industry leaders from SpaceX, NASA, Google AI, MIT Research Labs, and Quantum Computing pioneers. Get personalized mentorship throughout the hackathon.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Singularity Hackathon | Reach for the Stars</p>
+        <p>Contact: sv02619@gmail.com | Virtual Event</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/tech_arc06" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@tech_arc06" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Floating particles
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 100; i++) {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.width = p.style.height = Math.random() * 5 + 'px';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDelay = Math.random() * 20 + 's';
+            p.style.animationDuration = 10 + Math.random() * 20 + 's';
+            particles.appendChild(p);
+        }
+    </script>
+</body>
+</html>
